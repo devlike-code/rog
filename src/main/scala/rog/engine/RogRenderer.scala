@@ -11,7 +11,7 @@ object RogRenderer {
     var textFont: TruetypeRogFont = null
     var rexFont: BitmapRogFont = null
     
-    def show() {
+    def show(game: RogGame) {
         SwingUtilities.invokeLater(() => {
             val frame = new JFrame("Rog")
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)
@@ -24,7 +24,7 @@ object RogRenderer {
             
             frame.setSize(1280, 920)
             
-            val drawingPanel = new DoubleBufferingPanel(frame)
+            val drawingPanel = new DoubleBufferingPanel(frame, game)
             frame.add(drawingPanel)
 
             frame.setVisible(true)

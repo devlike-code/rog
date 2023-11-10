@@ -9,8 +9,8 @@ object RogSceneGraph {
     val rand = new scala.util.Random
 
     def render() {
-        renderGui()
         renderWorld()
+        renderGui()
     }
 
     def renderWorld() {

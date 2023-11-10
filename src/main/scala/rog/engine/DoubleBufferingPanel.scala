@@ -18,14 +18,13 @@ import java.nio.file.Files
 
 class DoubleBufferingPanel extends JPanel { 
     private var buffer: BufferedImage = null
+    private var game: RogGame = null
+
+    def this(frame: JFrame, game: RogGame) {
+        this()
+        this.game = game
+        this.setSize(frame.getSize())
         
-    def this(frame: JFrame) {
-        this();
-        this.setSize(frame.getSize());
-        
-        RogRenderer.textFont = TruetypeRogFont("fonts/whitrabt.ttf", 16)
-        RogRenderer.rexFont = BitmapRogFont("fonts/MRMOTEXTEX_rexpaintx2.png", 16, 16, 16)
-        RogSceneGraph.brain = RexPaint.loadFromResources("rex/brain.xp")
         this.buffer = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_ARGB)
         this.setFont(RogRenderer.textFont.derivedFont)
         val timer = new Timer(32, _ => repaint())
@@ -44,7 +43,7 @@ class DoubleBufferingPanel extends JPanel {
 
         RogRenderer.currentRenderer = Some(bufferGraphics)
         
-        RogSceneGraph.render()
+        game.render()
 
         RogRenderer.currentRenderer = None
         bufferGraphics.dispose()
