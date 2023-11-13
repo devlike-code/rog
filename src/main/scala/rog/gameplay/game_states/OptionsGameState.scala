@@ -7,7 +7,7 @@ import rog.gameplay.GameStateDriver
 import rog.rexpaint.RexPaint
 
 case object OptionsGameState extends GameState {
-    val options = RexPaint.loadFromResources("rex/options-title.xp")
+    val options = RexPaint.loadFromResources("rex/titles/options-title.xp")
     
     override def render() = {
         CommonAssets.rogLogo.show(32, 6)

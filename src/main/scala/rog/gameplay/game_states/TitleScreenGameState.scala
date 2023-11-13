@@ -28,9 +28,9 @@ case object QuitGameMenuOption extends TitleScreenMenuOption {
 }
 
 case object TitleScreenGameState extends GameState {
-    val start = RexPaint.loadFromResources("rex/start-adventure.xp")
-    val options = RexPaint.loadFromResources("rex/options.xp")
-    val quit = RexPaint.loadFromResources("rex/quit-game.xp")
+    val start = RexPaint.loadFromResources("rex/buttons/start-adventure.xp")
+    val options = RexPaint.loadFromResources("rex/buttons/options.xp")
+    val quit = RexPaint.loadFromResources("rex/buttons/quit-game.xp")
 
     var selected: TitleScreenMenuOption = StartAdventureMenuOption
 

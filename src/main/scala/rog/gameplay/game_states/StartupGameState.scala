@@ -8,7 +8,7 @@ import rog.engine.RogInput
 
 case object StartupGameState extends GameState with TimeDelayMixin {
     val delay = 30
-    val logo = RexPaint.loadFromResources("rex/devlike.xp")
+    val logo = RexPaint.loadFromResources("rex/logos/devlike.xp")
 
     override def update() {
         if (GameStateDriver.currentState == this && delayStillCounting()) {
