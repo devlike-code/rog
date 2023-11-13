@@ -5,6 +5,7 @@ import rog.gameplay.game_states._
 import rog.rexpaint.RexPaint
 import rog.gameplay.GameStateDriver
 import rog.engine.RogInput
+import rog.gameplay.TriggerCut
 
 case object StartupGameState extends GameState with TimeDelayMixin {
     val delay = 30
@@ -13,7 +14,7 @@ case object StartupGameState extends GameState with TimeDelayMixin {
     override def update() {
         if (GameStateDriver.currentState == this && delayStillCounting()) {
             if (RogInput.checkOnce("Ok")) {
-                GameStateDriver.trigger("hurry")
+                GameStateDriver.trigger(TriggerCut)
             }
         }
     }

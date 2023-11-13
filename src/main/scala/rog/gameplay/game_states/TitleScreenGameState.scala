@@ -6,6 +6,8 @@ import rog.rexpaint.RexPaintDocument
 import rog.engine.RogInput
 import rog.gameplay.GameStateDriver
 import rog.gameplay.CommonAssets
+import rog.gameplay.TriggerStartAdventure
+import rog.gameplay.TriggerOptions
 
 trait TitleScreenMenuOption {
     def previousOption: Option[TitleScreenMenuOption]
@@ -49,10 +51,10 @@ case object TitleScreenGameState extends GameState {
         } else if (RogInput.checkOnce("Ok")) {
             selected match {
                 case StartAdventureMenuOption => 
-                    GameStateDriver.trigger("adventure")
+                    GameStateDriver.trigger(TriggerStartAdventure)
 
                 case OptionsMenuOption => 
-                    GameStateDriver.trigger("options")
+                    GameStateDriver.trigger(TriggerOptions)
 
                 case QuitGameMenuOption => 
                     System.exit(0)

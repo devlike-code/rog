@@ -9,6 +9,12 @@ trait Tile {
   def show(): (Char, Color, Color)
 }
 
+case object FloorTile extends Tile {
+  val isWalkable: Boolean = true
+
+  def show() = ('.', RogColor.TRANSPARENT, Color.WHITE)
+}
+
 sealed trait DoorState
 case object Open extends DoorState
 case object Closed extends DoorState

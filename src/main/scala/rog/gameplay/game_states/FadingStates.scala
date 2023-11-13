@@ -5,6 +5,7 @@ import rog.gameplay.GameStateDriver
 import java.awt.Graphics2D
 import rog.engine.RogRenderer
 import java.awt.Color
+import rog.gameplay.TriggerEnd
 
 
 abstract class FadeTransition[G <: GameState](next: G) extends GameState {
@@ -16,7 +17,7 @@ abstract class FadeTransition[G <: GameState](next: G) extends GameState {
     override def update() {
         time += 1
         if (time == frameDuration) {
-            GameStateDriver.trigger("end")
+            GameStateDriver.trigger(TriggerEnd)
         }
     }
 
@@ -53,7 +54,7 @@ trait TimeDelayMixin {
     def delayStillCounting(): Boolean = {
         time += 1
         if (time == delay) {
-            GameStateDriver.trigger("end")
+            GameStateDriver.trigger(TriggerEnd)
             false
         } else {
             true

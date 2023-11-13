@@ -31,5 +31,9 @@
 
     "truetype-font": {
         "fonts/whitrabt.ttf": 16
-    }
+    },
+
+    "debug-flags": [
+        "startAdventureRightAway"
+    ]
 }

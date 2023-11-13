@@ -5,6 +5,7 @@ import rog.gameplay.CommonAssets
 import rog.engine.RogInput
 import rog.gameplay.GameStateDriver
 import rog.rexpaint.RexPaint
+import rog.gameplay.TriggerBack
 
 case object OptionsGameState extends GameState {
     
@@ -15,7 +16,7 @@ case object OptionsGameState extends GameState {
 
     override def update() = {
         if (RogInput.checkOnce("Cancel")) {
-            GameStateDriver.trigger("back")
+            GameStateDriver.trigger(TriggerBack)
         }
     }
 }

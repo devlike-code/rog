@@ -4,20 +4,34 @@ import rog.engine.RogStateMachineDriver
 import rog.gameplay.game_states._
 import rog.engine.RogStateMachineNode
 import game_states.OptionsGameState
+import rog.config.RogConfig
 
 trait GameState extends RogStateMachineNode
 
-case object GameStateDriver extends RogStateMachineDriver[GameState, String] {
-    var currentState: GameState = FadeFromBlackTransition(StartupGameState)
+sealed trait GameStateTransition
+case object TriggerEnd extends GameStateTransition
+case object TriggerCut extends GameStateTransition
+case object TriggerStartAdventure extends GameStateTransition
+case object TriggerOptions extends GameStateTransition
+case object TriggerBack extends GameStateTransition
+
+case object GameStateDriver extends RogStateMachineDriver[GameState, GameStateTransition] {
+    var currentState: GameState = 
+        FadeFromBlackTransition(
+            if (RogConfig().debugFlags.contains("startAdventureRightAway")) { 
+                AdventureGameState 
+            } else { 
+                StartupGameState 
+            })
     
-    override def transitions: PartialFunction[(GameState, String),GameState] = {
-        case (self@StartupGameState, "end") => FadeToBlackTransition(self, TitleScreenGameState)
-        case (self@StartupGameState, "hurry") => FadeToBlackTransition(self, TitleScreenGameState, 10)
-        case (self@TitleScreenGameState, "adventure") => FadeToBlackTransition(self, AdventureGameState)
-        case (TitleScreenGameState, "options") => OptionsGameState
-        case (OptionsGameState, "back") => TitleScreenGameState
-        case (AdventureGameState, "pause") => PauseMenuGameState
-        case (PauseMenuGameState, "back") => AdventureGameState
+    override def transitions: PartialFunction[(GameState, GameStateTransition), GameState] = {
+        case (self@StartupGameState, TriggerEnd) => FadeToBlackTransition(self, TitleScreenGameState)
+        case (self@StartupGameState, TriggerCut) => FadeToBlackTransition(self, TitleScreenGameState, 10)
+        case (self@TitleScreenGameState, TriggerStartAdventure) => FadeToBlackTransition(self, AdventureGameState)
+        case (TitleScreenGameState, TriggerOptions) => OptionsGameState
+        case (OptionsGameState, TriggerBack) => TitleScreenGameState
+        case (AdventureGameState, TriggerOptions) => PauseMenuGameState
+        case (PauseMenuGameState, TriggerBack) => AdventureGameState
 
         case (FadeToBlackTransition(from, to, _dur), _transition) => FadeFromBlackTransition(to)
         case (FadeFromBlackTransition(to, _dur), _transition) => to
