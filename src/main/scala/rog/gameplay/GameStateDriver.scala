@@ -3,10 +3,9 @@ package rog.gameplay
 import rog.engine.RogStateMachineDriver
 import rog.gameplay.game_states._
 import rog.engine.RogStateMachineNode
+import game_states.OptionsGameState
 
 trait GameState extends RogStateMachineNode
-
-case object PauseMenuGameState extends GameState
 
 case object GameStateDriver extends RogStateMachineDriver[GameState, String] {
     var currentState: GameState = FadeFromBlackTransition(StartupGameState)
@@ -18,7 +17,7 @@ case object GameStateDriver extends RogStateMachineDriver[GameState, String] {
         case (TitleScreenGameState, "options") => OptionsGameState
         case (OptionsGameState, "back") => TitleScreenGameState
         case (AdventureGameState, "pause") => PauseMenuGameState
-        case (PauseMenuGameState, "unpause") => AdventureGameState
+        case (PauseMenuGameState, "back") => AdventureGameState
 
         case (FadeToBlackTransition(from, to, _dur), _transition) => FadeFromBlackTransition(to)
         case (FadeFromBlackTransition(to, _dur), _transition) => to

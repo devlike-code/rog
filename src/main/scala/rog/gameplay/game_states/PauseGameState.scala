@@ -5,15 +5,12 @@ import rog.gameplay.CommonAssets
 import rog.engine.RogInput
 import rog.gameplay.GameStateDriver
 import rog.rexpaint.RexPaint
+import rog.gameplay.game_states.OptionsGameState
 
-case object OptionsGameState extends GameState {
-    
-    override def render() = {
-        CommonAssets.rogLogo.show(32, 6)
-        CommonAssets.optionsTitle.show(30, 18)
-    }
+case object PauseMenuGameState extends GameState {    
+    override def render(): Unit = OptionsGameState.render
 
-    override def update() = {
+    override def update(): Unit = {
         if (RogInput.checkOnce("Cancel")) {
             GameStateDriver.trigger("back")
         }
