@@ -69,7 +69,6 @@ case class WalkAction(move: Direction) extends Action {
     def perform(actor: Actor): ActionResult = {
         val pos = actor.pos + move.dir();
         
-        // (getActorAt(xy), getTileAt(xy), getItemAt(xy))
         World.describe(pos) match {
             case (Some(target), _, _) if target != actor => 
                 ActionAlternate(AttackAction(target))

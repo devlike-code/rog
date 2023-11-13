@@ -27,7 +27,11 @@ class DoubleBufferingPanel extends JPanel {
         
         this.buffer = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_ARGB)
         this.setFont(RogRenderer.textFont.derivedFont)
-        val timer = new Timer(32, _ => repaint())
+        val timer = new Timer(32, _ => {
+            RogInput.update()
+            game.update()
+            repaint()
+        })
         timer.start()
     }
     
@@ -35,7 +39,7 @@ class DoubleBufferingPanel extends JPanel {
         super.paintComponent(g)
         val rand = new scala.util.Random
         val measureTimeStart = System.currentTimeMillis
-        
+                
         val bufferGraphics = buffer.getGraphics.asInstanceOf[Graphics2D]
         bufferGraphics.setFont(RogRenderer.textFont.derivedFont);
         bufferGraphics.setColor(Color.BLACK)
@@ -51,7 +55,7 @@ class DoubleBufferingPanel extends JPanel {
         val measureTimeStop = System.currentTimeMillis - measureTimeStart
         Diagnostics.addRenderTime(measureTimeStop)
         
-        println(Diagnostics.getAverageRenderTimeMs() + "ms")
+        // println(Diagnostics.getAverageRenderTimeMs() + "ms")
         
         g.drawImage(buffer, 0, 0, null)
     }

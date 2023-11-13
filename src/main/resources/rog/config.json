@@ -1,0 +1,35 @@
+{
+    "input-mappings": {
+        "Ok": [ 
+            "Space", "Enter" 
+        ],
+
+        "Cancel": [
+            "Escape"
+        ],
+
+        "Up": [ 
+            "W", "Up"
+        ],
+
+        "Down": [ 
+            "S", "Down" 
+        ],
+
+        "Left": [ 
+            "A", "Left" 
+        ],
+
+        "Right": [ 
+            "D", "Right" 
+        ]
+    },
+
+    "bitmap-font": {
+        "fonts/MRMOTEXTEX_rexpaintx2.png": 16
+    },
+
+    "truetype-font": {
+        "fonts/whitrabt.ttf": 16
+    }
+}

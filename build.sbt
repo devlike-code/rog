@@ -12,5 +12,7 @@ lazy val root = (project in file("."))
     libraryDependencies += munit % Test
   )
 
+libraryDependencies += "org.scala-lang.modules" %% "scala-collection-contrib" % "0.3.0"
+libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.15.3"
 
 fork := true

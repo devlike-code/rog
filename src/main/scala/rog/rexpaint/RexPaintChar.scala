@@ -13,24 +13,17 @@ object RexPaintChar {
 
 case class RexPaintChar(front: Color, back: Color, sym: Char) {
     def show(x: Int, y: Int) {
-        RogRenderer.currentRenderer match {
-            case Some(render) => {
-                render.setComposite(RexPaintChar.srcOver);
-                render.setColor(back)
-                render.fillRect(x, y, 16, 16)
-                RogRenderer.rexFont.draw(sym)(x, y)(render)
+        val render = RogRenderer()
+        render.setComposite(RexPaintChar.srcOver);
+        render.setColor(back)
+        render.fillRect(x, y, 16, 16)
+        RogRenderer.rexFont.draw(sym)(x, y)(render)
 
-                render.setComposite(RexPaintChar.srcOut);
-                render.setXORMode(front)
-                RogRenderer.rexFont.draw(sym)(x, y)(render)
-                render.setPaintMode()
-                render.setComposite(RexPaintChar.srcOver);
-            }
-
-            case None => {}
-        }            
+        render.setComposite(RexPaintChar.srcOut);
+        render.setXORMode(front)
+        RogRenderer.rexFont.draw(sym)(x, y)(render)
+        render.setPaintMode()
+        render.setComposite(RexPaintChar.srcOver);
     }
-        
-
 }
 
