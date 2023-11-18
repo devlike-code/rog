@@ -8,7 +8,7 @@ case class OpenDoorAction(pos: Pos) extends Action {
         World.getTileAt(pos) match {
             case Some(DoorTile(Closed)) => 
                 World.setTileAt(pos, DoorTile(Open))
-                ActionAlternate(LookAction)
+                ActionContinuation(LookAction)
             
             case Some(DoorTile(Locked(key))) if actor.inventory.contains(key) =>
                 World.setTileAt(pos, DoorTile(Open))

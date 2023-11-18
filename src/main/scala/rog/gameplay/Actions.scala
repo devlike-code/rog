@@ -1,8 +1,9 @@
 package rog.gameplay
 
-trait ActionResult
+sealed trait ActionResult
 case class ActionSucceed(message: String = "") extends ActionResult
 case class ActionSequence(seq: Seq[Action]) extends ActionResult
+case class ActionContinuation(action: Action) extends ActionResult
 case class ActionAlternate(action: Action) extends ActionResult
 case class ActionFail(message: String) extends ActionResult
 
@@ -24,8 +25,9 @@ object Action {
         val (actor, action) = actor_action;
         action.perform(actor) match {
             case ActionFail(message) => 0
-            case ActionSequence(seq) => seq.map(next => run(actor, next)).sum
+            case ActionSequence(seq) => action.length + seq.map(next => run(actor, next)).sum
             case ActionAlternate(alt) => run((actor, alt))
+            case ActionContinuation(alt) => action.length + run((actor, alt))
             case ActionSucceed(message) => action.length
         }
     }

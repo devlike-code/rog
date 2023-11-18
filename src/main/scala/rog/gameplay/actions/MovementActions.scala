@@ -29,7 +29,7 @@ case class WalkAction(move: Direction) extends Action {
                 ActionSequence(Seq(PickupItemAction(item), TeleportAction(pos)))
             
             case (_, Some(tile), _) if tile.isWalkable =>
-                ActionAlternate(TeleportAction(pos))
+                ActionContinuation(TeleportAction(pos))
             
             case _ => 
                 ActionFail("Cannot move there.")
