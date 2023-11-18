@@ -33,7 +33,7 @@ trait Actor {
 		cachedFOV
 	}
 	
-	def update()
+	def update(): Unit
 
     def apply(ability: String): Int =
         this.vows.get(ability).map(_.to_value()).getOrElse(0)

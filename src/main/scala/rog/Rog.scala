@@ -44,6 +44,11 @@ object Rog extends RogGame {
             }
         }
 
+        for (j <- 4 to 13) {
+            World.setTileAt(Pos(8, j), WallTile)
+        }
+
+
         World.setTileAt(Pos(8, 8), DoorTile(Closed))
         World.addActor(Player)
 

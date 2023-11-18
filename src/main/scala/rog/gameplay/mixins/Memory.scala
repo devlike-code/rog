@@ -3,11 +3,15 @@ package rog.gameplay.mixins
 import rog.gameplay._
 
 trait Memory extends Actor {
-    var memory: Set[Pos] = Set()
+    var memory: Map[Pos, Char] = Map()
 
     override def fov(): Set[Pos] = {
         val newFov: Set[Pos] = super.fov()
-        memory ++= newFov
+        newFov.foreach(pos => {
+            memory += (pos -> World.getVisual(pos).get._1)
+        })
+        
+        //memory ++= newFov.keys
         newFov
     }
 }

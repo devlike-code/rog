@@ -35,6 +35,6 @@
 
     "debug-flags": [
         "jump_into_game_directly",
-        "!diagnostics"
+        "~diagnostics"
     ]
 }

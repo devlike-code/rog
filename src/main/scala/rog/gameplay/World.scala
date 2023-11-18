@@ -1,10 +1,13 @@
 package rog.gameplay
 
 import java.awt.Color
-import rog.gameplay.Actor
-import rog.gameplay.Tile
-import rog.gameplay.Item
+import rog.gameplay._
 import rlforj.los.ILosBoard
+
+sealed trait WorldLayer
+case object ActorLayer extends WorldLayer
+case object ItemLayer extends WorldLayer
+case object TileLayer extends WorldLayer
 
 object World extends ILosBoard {
     private val tiles = scala.collection.mutable.Map[Pos, Tile]()
@@ -71,6 +74,13 @@ object World extends ILosBoard {
             case _ => None
         }
     }
+
+    def getTopLayer(xy: Pos): WorldLayer = 
+        describe(xy) match {
+            case (Some(_), _, _) => ActorLayer
+            case (_, _, Some(_)) => ItemLayer
+            case _ => TileLayer
+        }
 
     def contains(x: Int, y: Int): Boolean = tiles.contains(Pos(x, y))
     def isObstacle(x: Int, y: Int): Boolean = !tiles(Pos(x, y)).isWalkable

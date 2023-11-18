@@ -20,21 +20,22 @@ object RogGameView {
     def render() = {
         val render = RogRenderer()
 
-        Player.memory.map(pos => {
-            val x = pos.x * 16
-            val y = pos.y * 16
-            render.setColor(Color.BLACK)
-            render.fillRect(x.toInt, y.toInt, 16, 16)
-            render.setColor(Color.GRAY)
-            RogRenderer.textFont.draw(".")(x.toInt + 3, y.toInt + 13)(render)
-        })
+        Player.memory.map { case (pos, chr) => {
+            if (!Player.cachedFOV.contains(pos)) {
+                val x = pos.x * 16
+                val y = pos.y * 16
+                render.setColor(Color.BLACK)
+                render.fillRect(x.toInt, y.toInt, 16, 16)
+                render.setColor(Color.GRAY.darker())
+                RogRenderer.textFont.draw(chr)(x.toInt + 3, y.toInt + 13)(render)
+            }
+        }}
         
         Player.cachedFOV.foreach{ case pos@Pos(i, j) => {
             World.getVisual(pos) match {
                 case Some((sym, back, front)) => {
                     val x = i * 16;
-                    val y = j * 16;
-                    
+                    val y = j * 16;                    
                     render.setColor(back)
                     render.fillRect(x.toInt, y.toInt, 16, 16)
                     render.setColor(front)
@@ -44,5 +45,8 @@ object RogGameView {
                 case None => {}
             }
         }}
+
+        //render.setColor(Color.WHITE)
+        //RogRenderer.textFont.draw(Player.pos.toString)(241, 30)(render)
     }
 }
