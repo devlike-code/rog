@@ -9,6 +9,13 @@ trait Tile {
   def show(): (Char, Color, Color)
 }
 
+case object WallTile extends Tile {
+  val isWalkable: Boolean = false
+
+  def show() = ('#', RogColor.TRANSPARENT, Color.WHITE)
+}
+
+
 case object FloorTile extends Tile {
   val isWalkable: Boolean = true
 

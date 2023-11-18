@@ -34,6 +34,7 @@
     },
 
     "debug-flags": [
-        "startAdventureRightAway"
+        "jump_into_game_directly",
+        "!diagnostics"
     ]
 }

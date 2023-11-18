@@ -5,6 +5,7 @@ import rog.gameplay.game_states._
 import rog.engine.RogStateMachineNode
 import game_states.OptionsGameState
 import rog.config.RogConfig
+import game_states.AdventureGameState
 
 trait GameState extends RogStateMachineNode
 
@@ -18,10 +19,10 @@ case object TriggerBack extends GameStateTransition
 case object GameStateDriver extends RogStateMachineDriver[GameState, GameStateTransition] {
     var currentState: GameState = 
         FadeFromBlackTransition(
-            if (RogConfig().debugFlags.contains("startAdventureRightAway")) { 
+            if (RogConfig().debugFlags.contains("jump_into_game_directly")) { 
                 AdventureGameState 
             } else { 
-                StartupGameState 
+                StartupGameState
             })
     
     override def transitions: PartialFunction[(GameState, GameStateTransition), GameState] = {

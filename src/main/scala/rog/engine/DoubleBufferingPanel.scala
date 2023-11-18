@@ -15,6 +15,7 @@ import rog.gameplay.World
 import rog.rexpaint.RexPaintDocument
 import rog.rexpaint.RexPaint
 import java.nio.file.Files
+import rog.config.RogConfig
 
 class DoubleBufferingPanel extends JPanel { 
     private var buffer: BufferedImage = null
@@ -55,7 +56,9 @@ class DoubleBufferingPanel extends JPanel {
         val measureTimeStop = System.currentTimeMillis - measureTimeStart
         Diagnostics.addRenderTime(measureTimeStop)
         
-        // println(Diagnostics.getAverageRenderTimeMs() + "ms")
+        if (RogConfig().debugFlags.contains("diagnostics")) {
+            println(Diagnostics.getAverageRenderTimeMs() + "ms")
+        }
         
         g.drawImage(buffer, 0, 0, null)
     }

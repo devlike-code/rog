@@ -11,7 +11,7 @@ case object OptionsGameState extends GameState {
     
     override def render() = {
         CommonAssets.rogLogo.show(32, 6)
-        CommonAssets.optionsTitle.show(30, 18)
+        CommonAssets.optionsTitle.show(14, 18)
     }
 
     override def update() = {
