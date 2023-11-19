@@ -21,7 +21,7 @@ class DoubleBufferingPanel extends JPanel {
     private var buffer: BufferedImage = null
     private var game: RogGame = null
 
-    def this(frame: JFrame, game: RogGame) {
+    def this(frame: JFrame, game: RogGame) = {
         this()
         this.game = game
         this.setSize(frame.getSize())
@@ -29,8 +29,11 @@ class DoubleBufferingPanel extends JPanel {
         this.buffer = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_ARGB)
         this.setFont(RogRenderer.textFont.derivedFont)
         val timer = new Timer(32, _ => {
+            val measureTimeStart = System.currentTimeMillis
             RogInput.update()
             game.update()
+            val measureTimeStop = System.currentTimeMillis - measureTimeStart
+            Diagnostics.addUpdateTime(measureTimeStop)
             repaint()
         })
         timer.start()
@@ -57,7 +60,7 @@ class DoubleBufferingPanel extends JPanel {
         Diagnostics.addRenderTime(measureTimeStop)
         
         if (RogConfig().debugFlags.contains("diagnostics")) {
-            println(Diagnostics.getAverageRenderTimeMs() + "ms")
+            Diagnostics.print()
         }
         
         g.drawImage(buffer, 0, 0, null)

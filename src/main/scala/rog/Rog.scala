@@ -51,6 +51,9 @@ object Rog extends RogGame {
 
         World.setTileAt(Pos(8, 8), DoorTile(Closed))
         World.addActor(Player)
+        Player.fov()
+
+        World.addActor(Dart)
 
         TurnManager.initialize()
     }

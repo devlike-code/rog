@@ -4,6 +4,8 @@ import rog.gameplay._
 
 case class AttackAction(target: Actor) extends Action {
     def length = ActionTime.full
-    def perform(actor: Actor): ActionResult = ???
+    def name = "attack"
+    def perform(actor: Actor): ActionResult = 
+        ActionSucceed("Don't know how to attack.")
 }
 

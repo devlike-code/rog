@@ -35,6 +35,9 @@ trait Actor {
 	
 	def update(): Unit
 
+	def vowOption(ability: String): Option[Int] = 
+		this.vows.get(ability).map(_.to_value())
+
     def apply(ability: String): Int =
         this.vows.get(ability).map(_.to_value()).getOrElse(0)
 }

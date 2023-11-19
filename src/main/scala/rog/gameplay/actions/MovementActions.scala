@@ -4,6 +4,7 @@ import rog.gameplay._
 
 case class TeleportAction(to: Pos) extends Action {
     def length = ActionTime.none
+    def name = "teleport"
     def perform(actor: Actor): ActionResult = {
         World.moveActorTo(actor, to)
         if (actor == actors.Player) {
@@ -15,6 +16,7 @@ case class TeleportAction(to: Pos) extends Action {
 
 case class WalkAction(move: Direction) extends Action {
     def length = ActionTime.full
+    def name = "walk"
     def perform(actor: Actor): ActionResult = {
         val pos = actor.pos + move.dir()
         

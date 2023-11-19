@@ -4,6 +4,7 @@ import rog.gameplay._
 
 case class OpenDoorAction(pos: Pos) extends Action {
     def length = ActionTime.half
+    def name = "open_door"
     def perform(actor: Actor): ActionResult = {
         World.getTileAt(pos) match {
             case Some(DoorTile(Closed)) => 
@@ -29,6 +30,7 @@ case class OpenDoorAction(pos: Pos) extends Action {
 
 case class CloseDoorAction(pos: Pos) extends Action {
     def length = ActionTime.half
+    def name = "close_door"
     def perform(actor: Actor): ActionResult = {
         World.getTileAt(pos) match {
             case Some(DoorTile(Open)) =>

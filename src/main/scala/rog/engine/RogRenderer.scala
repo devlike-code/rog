@@ -13,7 +13,7 @@ object RogRenderer {
 
     def apply() = currentRenderer.get
     
-    def show(game: RogGame) {
+    def show(game: RogGame) = {
         SwingUtilities.invokeLater(() => {
             val frame = new JFrame("Rog")
             frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE)

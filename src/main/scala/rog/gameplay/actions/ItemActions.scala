@@ -5,6 +5,7 @@ import rog.gameplay._
 
 case class PickupItemAction(item: Item) extends Action {
     def length = ActionTime.full
+    def name = "pickup_item"
     def perform(actor: Actor): ActionResult = {
         actor.inventory = actor.inventory :+ item
         World.removeItemAt(item)

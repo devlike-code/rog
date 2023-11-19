@@ -13,7 +13,7 @@ object RogGameView {
     var eventLog = Seq[String]()
 
     def update() = {
-        Player.update()
+        World.getActors().foreach(_.update())
         TurnManager.update()
     }
 
@@ -46,7 +46,7 @@ object RogGameView {
             }
         }}
 
-        //render.setColor(Color.WHITE)
-        //RogRenderer.textFont.draw(Player.pos.toString)(241, 30)(render)
+        render.setColor(Color.WHITE)
+        RogRenderer.textFont.draw(Player.pos.toString)(241, 30)(render)
     }
 }

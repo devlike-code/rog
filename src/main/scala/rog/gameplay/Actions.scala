@@ -9,6 +9,7 @@ case class ActionFail(message: String) extends ActionResult
 
 trait Action {
     def length: Int
+    def name: String
     def perform(actor: Actor): ActionResult
 }
 
@@ -23,12 +24,17 @@ object ActionTime {
 object Action {
     def run(actor_action: (Actor, Action)): Int = {
         val (actor, action) = actor_action;
-        action.perform(actor) match {
-            case ActionFail(message) => 0
-            case ActionSequence(seq) => action.length + seq.map(next => run(actor, next)).sum
+        val cost = actor.vowOption("cost:" + action.name).getOrElse(action.length)
+        val performance = action.perform(actor)
+        val total = performance match {
+            case ActionFail(message) => actor.vowOption("cost:fail").getOrElse(0)
+            case ActionSequence(seq) => cost + seq.map(next => run(actor, next)).sum
             case ActionAlternate(alt) => run((actor, alt))
-            case ActionContinuation(alt) => action.length + run((actor, alt))
-            case ActionSucceed(message) => action.length
+            case ActionContinuation(alt) => cost + run((actor, alt))
+            case ActionSucceed(message) => cost
         }
+
+//        println(performance, " costs " + total)
+        total
     }
 }
