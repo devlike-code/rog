@@ -8,7 +8,7 @@ object TurnManager {
 
     def initialize() = {
         World.getActors().foreach(actor => {
-            actor.time = actor("speed")
+            actor.time = actor("stamina")
             queue.enqueue(actor)
         })
     }
@@ -22,7 +22,7 @@ object TurnManager {
         queue.headOption match {
             case head@Some(actor) if actor.time <= 0 && lastActed == head =>                
                 World.getActors().foreach(actor => {
-                    actor.time = actor("speed")
+                    actor.time = actor("stamina")
                 })
                 next(actor)
 

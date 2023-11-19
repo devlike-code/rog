@@ -1,28 +1,14 @@
 {
     "input-mappings": {
-        "Ok": [ 
-            "Space", "Enter" 
-        ],
+        "Ok": [ "Space", "Enter" ],
+        "Cancel": ["Escape"],
+        "Up": [ "W", "Up"],
+        "Down": [ "S", "Down" ],
+        "Left": [ "A", "Left" ],
+        "Right": [ "D", "Right" ],
 
-        "Cancel": [
-            "Escape"
-        ],
-
-        "Up": [ 
-            "W", "Up"
-        ],
-
-        "Down": [ 
-            "S", "Down" 
-        ],
-
-        "Left": [ 
-            "A", "Left" 
-        ],
-
-        "Right": [ 
-            "D", "Right" 
-        ]
+        "Wait": [ "Period" ],
+        "Search": [ "X" ]
     },
 
     "bitmap-font": {
@@ -35,6 +21,7 @@
 
     "debug-flags": [
         "jump_into_game_directly",
-        "!diagnostics"
+        "!diagnostics",
+        "!print_key_names"
     ]
 }

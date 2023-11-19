@@ -7,6 +7,8 @@ import scala.collection.mutable.Map
 import scala.collection.mutable.MultiDict
 import scala.collection.mutable.Queue
 
+import rog.config.RogConfig
+
 package object RogInputs {
     type InputName = String
     type ActionName = String
@@ -32,9 +34,13 @@ object RogInput extends KeyListener {
         inputQueue += ((getKeyName(key), true))
     }
         
-    override def keyReleased(key: KeyEvent): Unit = 
+    override def keyReleased(key: KeyEvent): Unit = {
+        if (RogConfig().debugFlags.contains("print_key_names")) {
+            println(getKeyName(key))
+        }
+
         inputQueue += ((getKeyName(key), false))
-        
+    }
 
     def update() = {
         previousInputState = currentInputState.clone

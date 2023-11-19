@@ -9,7 +9,6 @@ import rog.gameplay.vows.OrdinaryVows
 
 object Player extends Actor with Memory {
     OrdinaryVows.apply(this)
-    vows += ("sight" -> Stat(3))
 
     var pos: Pos = Pos(10, 10)
     
@@ -27,6 +26,10 @@ object Player extends Actor with Memory {
                 nextAction = Some(WalkAction(West))
             } else if (RogInput.checkOnce("Right")) {
                 nextAction = Some(WalkAction(East))
+            } else if (RogInput.checkOnce("Wait")) {
+                nextAction = Some(SkipAction)
+            } else if (RogInput.checkOnce("Search")) {
+                nextAction = Some(SearchAction)
             }
         }
     }
