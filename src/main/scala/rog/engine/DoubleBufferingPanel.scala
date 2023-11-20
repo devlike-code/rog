@@ -30,8 +30,8 @@ class DoubleBufferingPanel extends JPanel {
         this.setFont(RogRenderer.textFont.derivedFont)
         val timer = new Timer(32, _ => {
             val measureTimeStart = System.currentTimeMillis
-            RogInput.update()
-            game.update()
+                RogInput.update()
+                game.update()
             val measureTimeStop = System.currentTimeMillis - measureTimeStart
             Diagnostics.addUpdateTime(measureTimeStop)
             repaint()
