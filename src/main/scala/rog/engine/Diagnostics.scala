@@ -1,5 +1,7 @@
 package rog.engine
 import scala.collection.mutable.Queue
+import java.awt.Color
+import rog.gameplay.actors.Player
 
 object Diagnostics {
     val queueSize = 5
@@ -29,6 +31,15 @@ object Diagnostics {
     }
 
     def print() = {
-        println("[ U: " + getAverageUpdateTimeMs() + "ms | R:" + getAverageRenderTimeMs() + "ms ]")
+        println(Diagnostics.toString())
     }
+
+    def render() = {
+        val render = RogRenderer()
+        render.setColor(Color.RED)
+        RogRenderer.textFont.draw(Player.pos.toString + " " + Diagnostics.toString())(241, 30)(render)
+    }
+
+    override def toString(): String = 
+        "[ U: " + getAverageUpdateTimeMs() + "ms | R:" + getAverageRenderTimeMs() + "ms ]"
 }

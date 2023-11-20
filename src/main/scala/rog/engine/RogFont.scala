@@ -19,7 +19,7 @@ case class TruetypeRogFont(name: String, size: Int) extends RogFont {
     def draw(char: Char)(x: Int, y: Int): Graphics2D => Unit = {
         (graphics: Graphics2D) => {
             graphics.setFont(derivedFont)
-            graphics.drawString(char.toString(), x.toFloat, y.toFloat)
+            graphics.drawString(char.toString(), x.toFloat + 3, y.toFloat + 13)
         }
     }
 

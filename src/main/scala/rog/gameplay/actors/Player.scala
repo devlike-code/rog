@@ -33,5 +33,34 @@ object Player extends Actor with Memory {
             }
         }
     }
+
+    def render() = {
+        val render = RogRenderer()
+        Player.memory.map { case (pos, chr) => {
+            if (!Player.cachedFOV.contains(pos)) {
+                val x = pos.x * 16
+                val y = pos.y * 16
+                render.setColor(Color.BLACK)
+                render.fillRect(x.toInt, y.toInt, 16, 16)
+                render.setColor(Color.GRAY.darker())
+                RogRenderer.textFont.draw(chr)(x.toInt, y.toInt)(render)
+            }
+        }}
+        
+        Player.cachedFOV.foreach{ case pos@Pos(i, j) => {
+            World.getVisual(pos) match {
+                case Some((sym, back, front)) => {
+                    val x = i * 16;
+                    val y = j * 16;                    
+                    render.setColor(back)
+                    render.fillRect(x.toInt, y.toInt, 16, 16)
+                    render.setColor(front)
+                    RogRenderer.textFont.draw(sym)(x.toInt, y.toInt)(render)
+                }
+                
+                case None => {}
+            }
+        }}
+    }
 }
 
