@@ -15,7 +15,6 @@ case object WallTile extends Tile {
   def show() = ('#', RogColor.TRANSPARENT, Color.WHITE)
 }
 
-
 case object FloorTile extends Tile {
   val isWalkable: Boolean = true
 
